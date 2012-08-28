@@ -33,11 +33,15 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
-
+gem 'jquery-rails'
+gem 'client_side_validations'
 gem 'haml'
-gem 'pg'
+gem 'pg'   
+gem "carrierwave"
 gem 'haml-rails', :group => :development  
 gem 'sqlite3', :group => :development
+gem 'simple_form'
+gem "rmagick"
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
@@ -48,5 +52,6 @@ group :test do
   gem 'cucumber-rails'
   gem 'capybara' 
 	gem 'sqlite3'
+	gem 'launchy'
   
 end
