@@ -1,3 +1,21 @@
+Given /^that the administrator is logged in$/ do
+  AdminUser.create!(:email => "admin@example.com", :password => "password", 
+  :password_confirmation => "password", :terms_of_service => '1')
+  visit '/admin/login'  # express the regexp above with the code you wish you had  
+
+  fill_in 'admin_user[email]', :with => "admin@example.com"
+  fill_in 'admin_user[password]', :with => "password"
+  click_button "admin_user_submit"
+   
+end
+
+Then /^he or she should be able to see the Dashboard$/ do
+  page.should have_content("Signed in successfully")
+  page.should have_content("Dashboard")  
+ # pending # express the regexp above with the code you wish you had
+end
+
+
 Given /^that the "(.*?)" does not exist$/ do |arg1|
   Person.find_by_email(arg1).should be_nil
   @count = Person.count
@@ -5,11 +23,11 @@ end
 
 
 When /^I fill in the "(.*?)", "(.*?)", "(.*?)"$/ do |arg1, arg2, arg3|
-  visit new_person_path      
+  visit "/admin/people/new"     
   fill_in 'person_first_name',  :with => arg1
   fill_in 'person_last_name',  :with => arg2
   fill_in 'person_email', :with => arg3
-  click_button("Submit") 
+  click_on("Create Person") 
   
   #pending # express the regexp above with the code you wish you had
 end
@@ -36,6 +54,5 @@ end
 
 
 Then /^the page should display an "(.*?)"$/ do |arg1|
-  save_and_open_page
   page.should have_content(arg1)
 end

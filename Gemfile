@@ -42,6 +42,8 @@ gem 'haml-rails', :group => :development
 gem 'sqlite3', :group => :development
 gem 'simple_form'
 gem "rmagick"
+gem 'activeadmin'
+gem "meta_search",    '>= 1.1.0.pre'
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false

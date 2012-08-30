@@ -1,0 +1,33 @@
+<div "errors"> 
+	<ul>
+	<% @person.errors.full_messages.each do |msg| %>
+	    <li><%= msg %></li>
+	  <% end %>
+ </ul>
+</div>  
+
+<div>
+	Please enter the Peer Support Worker 
+</div>
+<%= form_for @person, :html => {:multipart => true}, :validate => true  do |f| %>  
+
+<div> 
+		<%= f.label :first_name %> 
+		<%= f.text_field :first_name %>
+</div> 
+ <div> 
+	 <%= f.label :last_name %> 
+	 <%= f.text_field :last_name %>
+</div>
+<div> 
+	 <p> H </p>
+	 <%= f.label :email %> 
+	 <%= f.text_field :email %>
+</div> 
+<div>
+    <%= f.file_field :image %>
+</div>
+<div> 
+	 <%= f.submit "Submit" %>
+</div>	
+<% end %> 
