@@ -15,6 +15,7 @@ Scenario Outline: Create a successful person
 	Examples:
 	|first_name| last_name| email|
 	|Kartik| Markandan| kmarkandan@shaw.ca|
+  
 
 Scenario Outline: Create a duplicate person
 Given that the "<email>" of the person is in the database
@@ -24,6 +25,7 @@ And the page should display an "<error_message>"
 	Examples:
 	|first_name| last_name| email | error_message| 
 	|Kartik| Markandan| kmarkandan@shaw.ca| Email has already been taken|
+ 
 
  Scenario Outline: Create a person with invalid person information
  Given that the "<email>" does not exist
@@ -35,7 +37,9 @@ Examples:
 |K|  | 2sha.ca| Email is invalid Last name cannot be blank|
 |Kart| Engel| @job.ca| Email is invalid|
 ||Louis | makr@shw.ca| First name cannot be blank|
-|Kartik| Markandan||Email can't be blank|
+|Kartik| Markandan||Email can't be blank|  
+
+
 		 
 
   

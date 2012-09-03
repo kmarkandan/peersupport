@@ -1,4 +1,4 @@
-<div "errors"> 
+<div id="errors"> 
 	<ul>
 	<% @person.errors.full_messages.each do |msg| %>
 	    <li><%= msg %></li>
@@ -7,7 +7,7 @@
 </div>
 <%= semantic_form_for [:admin, @person] do |f| %>
   <%= f.inputs :first_name, :last_name, :email, :image, :as => :file %> 
- <%= f.action(:submit) %>
+ <%= f.actions(:submit) %>
 <% end %> 
 
 

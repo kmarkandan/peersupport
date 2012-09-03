@@ -5,7 +5,7 @@ Given /^that the administrator is logged in$/ do
 
   fill_in 'admin_user[email]', :with => "admin@example.com"
   fill_in 'admin_user[password]', :with => "password"
-  click_button "admin_user_submit"
+  click_on "admin_user_submit"
    
 end
 
@@ -38,7 +38,9 @@ end
 
 And /^the page should display the "(.*?)", "(.*?)", "(.*?)"$/ do |arg1, arg2, arg3|
   #page.should have_content("nothing")
-  page.should have_content(arg1 + " " + arg2 + " " + arg3)
+  page.should have_content(arg1) 
+  page.should have_content(arg2)
+  page.should have_content(arg3)
 end
                                                          
 
