@@ -2,8 +2,7 @@ require 'spec_helper'
 describe Admin::PeopleController do 
   render_views  
   before :each do
-    @admin_user = AdminUser.create!(:email => "admin@example.com", :password => "password", 
-     :password_confirmation => "password", :terms_of_service => '1')
+    @admin_user = AdminUser.create!(:email => "admin@example.com", :password => "password", :password_confirmation => "password", :terms_of_service => '1')
     sign_in  @admin_user
   end
   
@@ -185,5 +184,51 @@ describe Admin::PeopleController do
        response.body.should have_link("Delete")
      end     
     end
-  end
+  end 
+    # spec/runonly
+  describe "Skills Entry in new method" do
+    before :each do
+      @attr = {:email => "kmarkandan@shaw.ca", :first_name => "Kartik", 
+         :last_name => "Markandan", :image => "", :skills_attributes => {:title=>["", "1", "2"]}}
+         @attr2 = {:email => "kmarkand@shaw.ca", :first_name => "Kartika", 
+            :last_name => "Markandana", :image => ""}  
+            
+        #@person = Person.create(@attr)
+        #@person2 = Person.create(@attr2)
+        @attr_skill = {:title => "Basketball"}
+        @attr2_skill = {:title => "Baseball"}
+        @skill = Skill.create(@attr_skill) 
+        @skill2 = Skill.create(@attr2_skill)
+        
+      
+    end
+    describe "Success" do
+      it "should create a new person" do    
+          #post :create, 
+         lambda{post :create, :person => @attr}.should change(Person, :count).by(1)  
+      end  
+      it "should display the show page for the person" do
+         post :create, :person => @attr 
+         response.should render_template(assigns[:person])
+      end 
+      it "should just create the person if there are no skills" do
+        @attr = {:email => "kmarkandan@shaw.ca", :first_name => "Kartik", 
+           :last_name => "Markandan", :image => "", :skills_attributes => {:title=>[""]}}
+         lambda {post :create, :person => @attr}.should change(Person, :count).by(1)
+         response.should render_template(assigns[:person])    
+      end
+      
+       
+      
+    end
+    describe "Failure" do
+      it "should raise error if there are unknown skill titles" do
+         @attr = {:email => "kmarkandan@shaw.ca", :first_name => "Kartik", 
+             :last_name => "Markandan", :image => "", :skills_attributes => {:title=>["", 1, 2, 3, 4, 99]}}
+           lambda {post :create, :person => @attr}.should raise_error
+      end
+    end
+    
+    
+  end  
 end

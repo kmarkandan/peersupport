@@ -1,4 +1,25 @@
 ActiveAdmin::Dashboards.build do
+                                   
+ section "Peer Support Workers and their skills" do
+    table_for Person.order('last_name asc') do 
+       column("First Name") {|person| person.first_name}
+       column("Last Name")  {|person| person.last_name}
+       column("Email")  {|person| person.email}
+       column("Image") {|person| image_tag(person.image_url(:thumb).to_s) } 
+       column ("Skill Set") {|person| render 'skill', :person => person}
+      # column("Skill Set") do |person|
+       #  table_for person.skills do  |p2|
+        #   column("Skill Values") {|p2|  p2.title}
+           
+         #end
+      #end
+      #column("Yellow") r
+       
+      
+       
+      
+    end
+ end
 
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just

@@ -1,0 +1,6 @@
+ <ul>
+<% person.skills.order('title asc').each do |skill| %>
+<li><%= skill.title %> </li>
+<% end %>
+         
+</ul>

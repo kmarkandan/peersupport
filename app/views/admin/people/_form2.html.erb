@@ -1,0 +1,38 @@
+<div id="errors"> 
+	<ul>
+	<% @person.errors.full_messages.each do |msg| %>
+	    <li><%= msg %></li>
+	  <% end %>
+ </ul>
+</div>
+<%= semantic_form_for [:admin, @person] do |f| %>
+  <%= f.inputs :first_name, :last_name, :email, :image, :as => :file %> 
+  <%= f.inputs :name => "Skills", :id => "advanced" do %>
+  <%= f.semantic_fields_for :skills_attributes do |skill| %>   
+       <%if @person.skills.each do |skill_set|%>
+          <%= puts skill_set.title %> 
+       <% end %>                                                                                         		
+	      <%= skill.input :title, :as => :check_boxes, :name => "Title" , :collection => Skill.all  %> 
+	    <% end %>
+	<% end %>
+ 		
+ <%= f.actions(:submit) %>
+<% end %> 
+
+
+     
+      
+ 
+                               	<%= semantic_form_for [:admin, @person] do |f| %>
+ <%= f.inputs :first_name, :last_name, :email, :image, :as => :file %> 
+ <%= f.inputs :name => "Skills", :id => "advanced" do %>
+ <%= f.semantic_fields_for :skills_attributes do |skill| %>   
+      <%if @person.skills.each do |skill_set|%>
+         <%= puts skill_set.title %> 
+      <% end %>                                                                                         		
+	      <%= skill.input :title, :as => :check_boxes, :name => "Title" , :collection => Skill.all  %> 
+	    <% end %>
+	<% end %>
+		
+<%= f.actions(:submit) %>
+	<% end %>

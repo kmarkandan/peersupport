@@ -5,10 +5,31 @@
 	  <% end %>
  </ul>
 </div>
-<%= semantic_form_for [:admin, @person] do |f| %>
-  <%= f.inputs :first_name, :last_name, :email, :image, :as => :file %> 
- <%= f.actions(:submit) %>
-<% end %> 
+
+	<%= semantic_form_for [:admin, @person] do |f| %>
+  <% if @person.new_record? %>
+  	<%= f.inputs :first_name, :last_name, :email, :image, :as => :file %> 
+  	<%= f.inputs :name => "Skills", :id => "advanced" do %>
+  		<%= f.semantic_fields_for :skills_attributes do |skill| %>   
+	      <%= skill.input :title, :as => :check_boxes, :name => "Title" , :collection => Skill.all  %> 
+	    	<% end %>
+			<% end %>
+ 			 
+     <% else %>
+     		<%= f.inputs :first_name, :last_name, :email, :image, :as => :file %> 
+				 <%= f.inputs :name => "Skills", :id => "advanced" do %>
+				      <%= f.semantic_fields_for :skills_attributes do |skill| %>   
+				         <%= skill.input :title, :as => :check_boxes, :input_html => { :checked => 'checked' }, :name => "Title" , :collection => @person.skills  %>
+					      <%= skill.input :title, :as => :check_boxes, :name => "Title" , :collection => Skill.all - @person.skills  %> 
+					    	<% end %>
+				      
+			    <% end %>
+
+   <% end%> 
+     <%= f.actions(:submit) %>
+<% end %>  
+ 
+  
 
 
      
