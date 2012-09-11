@@ -1,4 +1,7 @@
-<div "errors"> 
+<div "errors">  
+	
+ 
+
 	<ul>
 	<% @person.errors.full_messages.each do |msg| %>
 	    <li><%= msg %></li>
@@ -30,3 +33,5 @@
 	 <%= f.submit "Submit" %>
 </div>	
 <% end %> 
+
+   

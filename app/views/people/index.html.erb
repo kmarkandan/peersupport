@@ -1,0 +1,16 @@
+<% form_tag people_path, :method => :get, :remote => true do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<div id="products">
+  <%= render Person.all %>
+</div>  
+<div>                       
+<%= link_to "Add to cart", :action=>"doThis", :controller=>"people", :update => "list_people", :remote => true %>    
+</div>
+<div id="list_people">
+	
+</div>
