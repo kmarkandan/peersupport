@@ -98,7 +98,7 @@ ActiveAdmin.register Person do |person|
         end 
          redirect_to admin_person_path(@person)
       else
-         render 'edit'
+        # render 'edit'
       end
       
      end

@@ -20,7 +20,8 @@ class PeopleController < ApplicationController
   def doThis        
     puts "Hello there!"
     respond_to do |format|
-      format.js{Person.all}
+      format.html {redirect_to Person.find(1)}
+      format.js 
     end
   end
   

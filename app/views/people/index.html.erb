@@ -9,7 +9,10 @@
   <%= render Person.all %>
 </div>  
 <div>                       
-<%= link_to "Add to cart", :action=>"doThis", :controller=>"people", :update => "list_people", :remote => true %>    
+
+   
+<%= link_to "People", { :controller => "people", :action => "doThis" }, :id => "news", :class => "article", 
+  :update => "list_people", :remote => true %>
 </div>
 <div id="list_people">
 	

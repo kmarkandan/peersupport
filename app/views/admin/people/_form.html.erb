@@ -1,3 +1,4 @@
+<%= javascript_include_tag "application" %>  
 <div id="errors"> 
 	<ul>
 	<% @person.errors.full_messages.each do |msg| %>
@@ -6,27 +7,30 @@
  </ul>
 </div>
 
-	<%= semantic_form_for [:admin, @person] do |f| %>
+	
   <% if @person.new_record? %>
-  	<%= f.inputs :first_name, :last_name, :email, :image, :as => :file %> 
+  <%= semantic_form_for [:admin, @person], :validate => true do |f| %>
+	<%= f.inputs :first_name, :last_name, :email, :image, :as => :file %> 
   	<%= f.inputs :name => "Skills", :id => "advanced" do %>
   		<%= f.semantic_fields_for :skills_attributes do |skill| %>   
 	      <%= skill.input :title, :as => :check_boxes, :name => "Title" , :collection => Skill.all  %> 
 	    	<% end %>
 			<% end %>
- 			 
-     <% else %>
+			<%= f.actions(:submit) %>  
+ 		 <%end%>  
+     <% else %> 
+     <%= semantic_form_for [:admin, @person], :validate => true do |f| %> 
      		<%= f.inputs :first_name, :last_name, :email, :image, :as => :file %> 
 				 <%= f.inputs :name => "Skills", :id => "advanced" do %>
 				      <%= f.semantic_fields_for :skills_attributes do |skill| %>   
-				         <%= skill.input :title, :as => :check_boxes, :input_html => { :checked => 'checked' }, :name => "Title" , :collection => @person.skills  %>
-					      <%= skill.input :title, :as => :check_boxes, :name => "Title" , :collection => Skill.all - @person.skills  %> 
+				         <%= skill.input :title, :as => :check_boxes, :input_html => { :checked => 'checked' }, :label => "Selected Fields" , :collection => @person.skills  %>
+					      <%= skill.input :title, :as => :check_boxes, :name => "Title" , :label => "Fields", :collection => Skill.all - @person.skills  %> 
 					    	<% end %>
 				      
 			    <% end %>
-
+     <%= f.actions(:submit) %>  
    <% end%> 
-     <%= f.actions(:submit) %>
+     
 <% end %>  
  
   

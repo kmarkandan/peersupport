@@ -34,8 +34,9 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
-gem 'jquery-rails'
-gem 'client_side_validations'
+gem 'jquery-rails' 
+
+gem "client_side_validations"  
 gem 'haml'
 gem 'pg'   
 gem "carrierwave"
